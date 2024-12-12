@@ -24,7 +24,8 @@ app.get('/api/standings',async (req,res) =>{
 
 app.use(express.static(path.join(__dirname,'public')))
 
-app.listen(3000)
+
+app.listen(3000, () => console.log("Running server on port 3000"))
 
 
 // error page not found?
