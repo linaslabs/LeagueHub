@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LeagueHub</title>
+    <link rel = "icon" type = "image/x-icon" href = "images/favicon.ico">
+</head>
+<body>
+    <script src="index.js"></script>
+    <h1>LeagueHub</h1>
+    
+
+        <table>
+            <tr>
+                <th>Team </th>
+                <th>MP</th>
+                <th>W</th>
+                <th>D</th>
+                <th>L</th>
+                <th>GF</th>
+                <th>GA</th>
+                <th>GD</th>
+                <th>Points</th>
+            </tr>
+            
+            <% standings.forEach(standing =>{ %>
+                <tr>
+                    <th> <%= standing.position %> <img src = "<%=standing.team.crest%>" height="15pt" width="15pt"> <%= standing.team.name %></th>
+                    <th> <%= standing.playedGames %></th>
+                    <th> <%= standing.won %></th>
+                    <th> <%= standing.draw %></th>
+                    <th> <%= standing.lost %></th>
+                    <th> <%= standing.goalsFor %></th>
+                    <th> <%= standing.goalsAgainst %></th>
+                    <th> <%= standing.goalDifference %></th>
+                    <th> <%= standing.points %></th>
+                </tr>
+            <% }) %>
+        </table>
+        
+    </div>
+
+    <div id = centre>
+
+    </div>
+
+    <div id = right>
+
+    </div>
+</body>
+</html>

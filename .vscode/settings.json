@@ -1,5 +1,7 @@
 {
     "editor.codeActionsOnSave": {
-
     },
+    "editor.tokenColorCustomizations": {
+        "comments": "#8e8686"
+    }
 }

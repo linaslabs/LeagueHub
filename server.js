@@ -1,5 +1,12 @@
 const express = require('express')
+
+// express app
 const app = express()
+
+// register view engine
+app.set('view engine', 'ejs')
+app.set('views', 'public') // changing views folder to the public folder
+
 const path = require('path')
 const cors = require('cors')
 const standingsApi = "http://api.football-data.org/v4/competitions/PL/standings"
@@ -12,23 +19,38 @@ app.use(
     })
 )
 
-app.get('/api/standings',async (req,res) =>{
+// backend api relay
+// app.get('/api/standings',async (req,res) =>{
+//     const response = await fetch(standingsApi, {
+//         headers:{
+//             "X-Auth-Token" : apiToken,
+//         }
+//     })
+//     const data = await response.json()
+//     res.json(data)
+// })
+
+// rendering index.ejs on homepage
+
+app.get('/', async (req,res) =>{
     const response = await fetch(standingsApi, {
         headers:{
             "X-Auth-Token" : apiToken,
         }
     })
     const data = await response.json()
-    res.json(data)
+
+    res.render('index', { standings: data["standings"][0]["table"]})
 })
 
+// making css and js files public so we can use them with index.ejs
 app.use(express.static(path.join(__dirname,'public')))
 
 
 app.listen(3000, () => console.log("Running server on port 3000"))
 
 
-// error page not found?
+// error page not found? uses ejs
 // app.use((req,res) =>{
-//     res.status(404).sendFile("./public/404.html", { root: __dirname})
+//     res.status(404).render('404')
 // })
