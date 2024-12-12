@@ -11,10 +11,9 @@
     <script src="index.js"></script>
     <h1>LeagueHub</h1>
     
-
-        <table>
-            <tr>
-                <th>Team </th>
+        <table id = "standings" border = "1" align="left">
+            <tr class = "rows">
+                <th class = "team">Team </th>
                 <th>MP</th>
                 <th>W</th>
                 <th>D</th>
@@ -22,25 +21,23 @@
                 <th>GF</th>
                 <th>GA</th>
                 <th>GD</th>
-                <th>Points</th>
+                <th class = "points">Pts</th>
             </tr>
             
             <% standings.forEach(standing =>{ %>
-                <tr>
-                    <th> <%= standing.position %> <img src = "<%=standing.team.crest%>" height="15pt" width="15pt"> <%= standing.team.name %></th>
-                    <th> <%= standing.playedGames %></th>
-                    <th> <%= standing.won %></th>
-                    <th> <%= standing.draw %></th>
-                    <th> <%= standing.lost %></th>
-                    <th> <%= standing.goalsFor %></th>
-                    <th> <%= standing.goalsAgainst %></th>
-                    <th> <%= standing.goalDifference %></th>
-                    <th> <%= standing.points %></th>
+                <tr class = "rows">
+                    <th class = "team"> <%= standing.position %> <img src = "<%=standing.team.crest%>" height="16pt" width="16pt"> <%= standing.team.name.replace(" FC","") %></th>
+                    <th width = 40> <%= standing.playedGames %></th>
+                    <th width = 40> <%= standing.won %></th>
+                    <th width = 40> <%= standing.draw %></th>
+                    <th width = 40> <%= standing.lost %></th>
+                    <th width = 40> <%= standing.goalsFor %></th>
+                    <th width = 40> <%= standing.goalsAgainst %></th>
+                    <th width = 40> <%= standing.goalDifference %></th>
+                    <th width = 40 class = "points"> <%= standing.points %></th>
                 </tr>
             <% }) %>
         </table>
-        
-    </div>
 
     <div id = centre>
 
