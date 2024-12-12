@@ -19,17 +19,6 @@ app.use(
     })
 )
 
-// backend api relay
-// app.get('/api/standings',async (req,res) =>{
-//     const response = await fetch(standingsApi, {
-//         headers:{
-//             "X-Auth-Token" : apiToken,
-//         }
-//     })
-//     const data = await response.json()
-//     res.json(data)
-// })
-
 // rendering index.ejs on homepage
 
 app.get('/', async (req,res) =>{
