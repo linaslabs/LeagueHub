@@ -27,14 +27,14 @@
             <% standings.forEach(standing =>{ %>
                 <tr class = "rows">
                     <th class = "team"> <%= standing.position %> <img src = "<%=standing.team.crest%>" height="16pt" width="16pt"> <%= standing.team.name.replace(" FC","") %></th>
-                    <th width = 35> <%= standing.playedGames %></th>
-                    <th width = 35> <%= standing.won %></th>
-                    <th width = 35> <%= standing.draw %></th>
-                    <th width = 35> <%= standing.lost %></th>
-                    <th width = 35> <%= standing.goalsFor %></th>
-                    <th width = 35> <%= standing.goalsAgainst %></th>
-                    <th width = 35> <%= standing.goalDifference %></th>
-                    <th width = 35 class = "points"> <%= standing.points %></th>
+                    <th width = 40> <%= standing.playedGames %></th>
+                    <th width = 40> <%= standing.won %></th>
+                    <th width = 40> <%= standing.draw %></th>
+                    <th width = 40> <%= standing.lost %></th>
+                    <th width = 40> <%= standing.goalsFor %></th>
+                    <th width = 40> <%= standing.goalsAgainst %></th>
+                    <th width = 40> <%= standing.goalDifference %></th>
+                    <th width = 40 class = "points"> <%= standing.points %></th>
                 </tr>
             <% }) %>
         </table>
