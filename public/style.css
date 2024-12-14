@@ -47,18 +47,30 @@ h1{
 
 #left{
     flex: 1;
-    border: 10px solid green;
-    height: 90vh;
+
+    height: 89vh;
 }
 
 #centre{
+    font-size: 27px;
     flex: 1;
-    border: 10px solid black;
+
+    align-items: center;
     text-align: center;
-    height: 90vh;
+    height: 89vh;
+    overflow: scroll;
 }
 #right{
     flex: 1;
-    border: 10px solid rgb(34, 6, 245);
-    height: 90vh;
+
+    height: 89vh;
+}
+
+hr{
+    background-color: rgb(54, 53, 53);
+    margin-top: 20px;
+}
+
+img{
+    vertical-align:text-top;
 }
