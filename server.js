@@ -12,6 +12,8 @@ const cors = require('cors')
 const standingsApi = "http://api.football-data.org/v4/competitions/PL/standings"
 const apiToken = "a8c7a2fb7ec9423c88904885ed9d082c"
 
+
+app.use(express.json())
 // Probably dont need this anymore
 app.use(
     cors({
@@ -30,6 +32,18 @@ app.get('/', async (req,res) =>{
     const data = await response.json()
 
     res.render('index', { standings: data["standings"][0]["table"]})
+})
+
+// getting info sent from front end about which team matches to fetch
+
+app.post('/teamMatches', async (req,res) =>{
+    const response = await fetch(`https://api.football-data.org/v4/teams/${req.body.id}/matches?status=SCHEDULED`,{
+        headers:{
+            "X-Auth-Token" : apiToken,
+        }
+    })
+    const data = await response.json()
+    res.send(data.matches)
 })
 
 // making css and js files public so we can use them with index.ejs

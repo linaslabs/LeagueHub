@@ -16,7 +16,8 @@ h1{
 }
 
 #standings{
-    font-size: 16px;
+    transform-origin: top;
+    font-size: 27px;
     border-color: white;
     border-width: 0;
     border-spacing: 0;
@@ -26,25 +27,38 @@ h1{
 
 .rows{
     background-color: rgb(54, 53, 53);
-    height: 40px;
+    height: 50px;
     vertical-align: middle;
+}
+
+.team:hover{
+    background-color: rgb(94, 93, 93);
 }
 
 .points{
     background-color: rgb(37, 37, 37);
 }
 
-/* doesnt do anything
-#left{
-    text-align: left;
-    color: whitesmoke;
-    background-color: rgb(80, 80, 80);
+#container{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
 }
-*/
+
+#left{
+    flex: 1;
+    border: 10px solid green;
+    height: 90vh;
+}
 
 #centre{
+    flex: 1;
+    border: 10px solid black;
     text-align: center;
+    height: 90vh;
 }
 #right{
-    text-align: right;
+    flex: 1;
+    border: 10px solid rgb(34, 6, 245);
+    height: 90vh;
 }

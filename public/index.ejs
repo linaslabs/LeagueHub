@@ -10,41 +10,48 @@
 <body>
     <script src="index.js"></script>
     <h1>LeagueHub</h1>
-    
-        <table id = "standings" border = "1" align="left">
-            <tr class = "rows">
-                <th class = "team">Team </th>
-                <th>MP</th>
-                <th>W</th>
-                <th>D</th>
-                <th>L</th>
-                <th>GF</th>
-                <th>GA</th>
-                <th>GD</th>
-                <th class = "points">Pts</th>
-            </tr>
-            
-            <% standings.forEach(standing =>{ %>
+    <div id = container>
+        <div id = left>
+            <table id = "standings" border = "1" align="center">
                 <tr class = "rows">
-                    <th class = "team"> <%= standing.position %> <img src = "<%=standing.team.crest%>" height="16pt" width="16pt"> <%= standing.team.name.replace(" FC","") %></th>
-                    <th width = 35> <%= standing.playedGames %></th>
-                    <th width = 35> <%= standing.won %></th>
-                    <th width = 35> <%= standing.draw %></th>
-                    <th width = 35> <%= standing.lost %></th>
-                    <th width = 35> <%= standing.goalsFor %></th>
-                    <th width = 35> <%= standing.goalsAgainst %></th>
-                    <th width = 35> <%= standing.goalDifference %></th>
-                    <th width = 35 class = "points"> <%= standing.points %></th>
+                    <th class = "team">Team </th>
+                    <th>MP</th>
+                    <th>W</th>
+                    <th>D</th>
+                    <th>L</th>
+                    <th>GF</th>
+                    <th>GA</th>
+                    <th>GD</th>
+                    <th class = "points">Pts</th>
                 </tr>
-            <% }) %>
-        </table>
+                
+                <% standings.forEach(standing =>{ %>
+                    <tr class = "rows">
+                        <th class = "team" onclick="teamMatches('<%=standing.team.id%>')"> <%= standing.position %> <img src = "<%=standing.team.crest%>" height="25pt" width="25pt"> <%= standing.team.name.replace(" FC","") %></th>
+                        <th width = 35> <%= standing.playedGames %></th>
+                        <th width = 35> <%= standing.won %></th>
+                        <th width = 35> <%= standing.draw %></th>
+                        <th width = 35> <%= standing.lost %></th>
+                        <th width = 35> <%= standing.goalsFor %></th>
+                        <th width = 35> <%= standing.goalsAgainst %></th>
+                        <th width = 35> <%= standing.goalDifference %></th>
+                        <th width = 35 class = "points"> <%= standing.points %></th>
+                    </tr>
+                <% }) %>
+            </table>
+        </div>
+        
+        <div id = centre>
+            
+        </div>
 
-    <div id = centre>
-
-    </div>
-
-    <div id = right>
-
+        <div id = right>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique aliquid
+                reprehenderit maxime voluptatem, quibusdam doloremque rem suscipit ducimus explicabo unde voluptate temporibu
+                s magnam sed laboriosam perferendis voluptates illum. Iusto, magni?
+            </p>
+        </div>
     </div>
 </body>
 </html>
