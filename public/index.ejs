@@ -46,7 +46,11 @@
         </div>
 
         <div id = right>
-            
+                <% (gameWeek.matches).forEach(match => { %>
+                    <script>dateConverter(`<%=match.utcDate%>`, `<%=,match.homeTeam.name.replace(" FC", "")%>`,`<%=match.awayTeam.name.replace(" FC", "")%>`,
+                    `<%=match.homeTeam.crest%>`, `<%=match.awayTeam.crest%>`, 'right', false)</script>
+                    
+                <% }) %>
         </div>
     </div>
 </body>

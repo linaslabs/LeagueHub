@@ -18,39 +18,57 @@ function teamMatches(element){
     })
     .then(response => response.json())
     .then(data => data.forEach(element => {
-        console.log(data)
-
-        var fixtureTime = new Date(element.utcDate)
-        const options = { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric'}
-        var fixtureDateFormatted = fixtureTime.toLocaleDateString('en-GB', options)
-        var fixtureTimeHours = fixtureTime.getHours().toString().padStart(2,'0')
-        var fixtureTimeMinutes = fixtureTime.getMinutes().toString().padStart(2,'0')
-
-        var lineBreak = document.createElement('br')
-        var fixture = document.createElement('p')
-        var line = document.createElement('hr')
-
-        var homeTeam = element.homeTeam.name.replace(" FC","")
-        var homeTeamCrest = document.createElement('img')
-        homeTeamCrest.src = element.homeTeam.crest
-        homeTeamCrest.style.width = '25pt'
-        homeTeamCrest.style.height = '25pt'
-        // alt text?
-        var awayTeam = element.awayTeam.name.replace(" FC","")
-        var awayTeamCrest = document.createElement('img')
-        awayTeamCrest.src = element.awayTeam.crest
-        awayTeamCrest.style.width = '25pt'
-        awayTeamCrest.style.height = '25pt'
-        // alt text?
-        var fixtureText = document.createTextNode(" " + homeTeam + " " + fixtureTimeHours + ":" + fixtureTimeMinutes + " " + awayTeam + " ") 
-        var fixtureTimeText = document.createTextNode(fixtureDateFormatted)
-        fixture.appendChild(fixtureTimeText)
-        fixture.appendChild(lineBreak)
-        fixture.appendChild(homeTeamCrest)
-        fixture.appendChild(fixtureText)
-        fixture.appendChild(awayTeamCrest)
-        document.getElementById('centre').append(fixture)
-        document.getElementById('centre').append(line)
+        dateConverter(element.utcDate,element.homeTeam.name.replace(" FC",""),element.awayTeam.name.replace(" FC",""),
+        element.homeTeam.crest,element.awayTeam.crest,'centre', true)
     }))
    
+}
+
+function dateConverter(date, homeTeam, awayTeam, homeTeamCrest, awayTeamCrest, divId, currentGameWeek){
+    var fixtureTime = new Date(date)
+    var homeTeam = decodeHTML(homeTeam)
+    var awayTeam = decodeHTML(awayTeam)
+
+    const options = { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric'}
+    var fixtureDateFormatted = fixtureTime.toLocaleDateString('en-GB', options)
+    var fixtureTimeHours = fixtureTime.getHours().toString().padStart(2,'0')
+    var fixtureTimeMinutes = fixtureTime.getMinutes().toString().padStart(2,'0')
+    var fixtureText = document.createTextNode(" " + homeTeam + " " + fixtureTimeHours + ":" + fixtureTimeMinutes + " " + awayTeam + " ") 
+    
+    var fixture = document.createElement('p')
+    var lineBreak = document.createElement('br')
+    var line = document.createElement('hr')
+    var fixtureTimeText = document.createTextNode(fixtureDateFormatted)
+
+    var homeTeamCrestIMG = document.createElement('img')
+    homeTeamCrestIMG.src = homeTeamCrest
+    homeTeamCrestIMG.style.width = '25pt'
+    homeTeamCrestIMG.style.height = '25pt'
+    // alt text?
+
+    var awayTeamCrestIMG = document.createElement('img')
+    awayTeamCrestIMG.src = awayTeamCrest
+    awayTeamCrestIMG.style.width = '25pt'
+    awayTeamCrestIMG.style.height = '25pt'
+    // alt text?
+    fixture.appendChild(fixtureTimeText)
+    fixture.appendChild(lineBreak)
+    fixture.appendChild(homeTeamCrestIMG)
+    fixture.appendChild(fixtureText)
+    fixture.appendChild(awayTeamCrestIMG)
+
+    if(currentGameWeek){
+        
+    }
+
+    document.getElementById(divId).append(fixture)
+    document.getElementById(divId).append(line)
+
+}
+
+// for converting '&' properly
+function decodeHTML(html){
+    var txt = document.createElement('textarea'); 
+    txt.innerHTML = html;
+    return txt.value;
 }

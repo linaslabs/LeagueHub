@@ -61,9 +61,13 @@ h1{
     overflow: scroll;
 }
 #right{
+    font-size: 23px;
     flex: 1;
 
+    align-items: center;
+    text-align: center;
     height: 89vh;
+    overflow: scroll;
 }
 
 hr{

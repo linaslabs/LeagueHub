@@ -24,14 +24,28 @@ app.use(
 // rendering index.ejs on homepage
 
 app.get('/', async (req,res) =>{
-    const response = await fetch(standingsApi, {
+    const standingsPL = await fetch(standingsApi, {
         headers:{
             "X-Auth-Token" : apiToken,
         }
     })
-    const data = await response.json()
+    const standingData = await standingsPL.json()
+    const gameWeek = standingData["season"]["currentMatchday"] 
+    
 
-    res.render('index', { standings: data["standings"][0]["table"]})
+    const gameWeekMatches = await fetch(`http://api.football-data.org/v4/competitions/2021/matches?matchday=${gameWeek}`, {
+        headers:{
+            "X-Auth-Token" : apiToken,
+        }
+    })
+    const gameWeekMatchesData = await gameWeekMatches.json()
+    
+    var variables = {
+        standings: standingData["standings"][0]["table"],
+        gameWeek : gameWeekMatchesData
+    }
+
+    res.render('index', variables)
 })
 
 // getting info sent from front end about which team matches to fetch
