@@ -47,9 +47,30 @@
 
         <div id = right>
                 <% (gameWeek.matches).forEach(match => { %>
-                    <script>dateConverter(`<%=match.utcDate%>`, `<%=,match.homeTeam.name.replace(" FC", "")%>`,`<%=match.awayTeam.name.replace(" FC", "")%>`,
-                    `<%=match.homeTeam.crest%>`, `<%=match.awayTeam.crest%>`, 'right', false)</script>
-                    
+                    <p>
+                        <script>document.write(formatDate(`<%=match.utcDate%>`))</script> <br>
+                        <div class = teams>
+                            <div class = homeTeam>
+                                <img src = "<%=match.homeTeam.crest%>" height="25pt" width="25pt"> <%=match.homeTeam.name.replace(" FC", "")%>
+                                <!--alt?-->
+                            </div>
+                            
+                            <div class = timeOrScore>
+                                <script>if(`<%=match.status%>` != "FINISHED"){
+                                    document.write(formatTime(`<%=match.utcDate%>`))
+                                }else{
+                                    document.write(`<%=match.score.fullTime.home%>`+ " - " + `<%=match.score.fullTime.away%>`)
+                                }
+                                </script>
+                            </div>
+                            
+                            <div class = awayTeam>
+                                <%=match.awayTeam.name.replace(" FC", "")%> <img src = "<%=match.awayTeam.crest%>" height="25pt" width="25pt">  <br>
+                            </div>
+                        </div>
+
+                        <hr>                     
+                    </p>
                 <% }) %>
         </div>
     </div>

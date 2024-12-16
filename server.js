@@ -44,7 +44,6 @@ app.get('/', async (req,res) =>{
         standings: standingData["standings"][0]["table"],
         gameWeek : gameWeekMatchesData
     }
-
     res.render('index', variables)
 })
 

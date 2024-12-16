@@ -17,7 +17,7 @@ h1{
 
 #standings{
     transform-origin: top;
-    font-size: 27px;
+    font-size: 20px;
     border-color: white;
     border-width: 0;
     border-spacing: 0;
@@ -27,7 +27,7 @@ h1{
 
 .rows{
     background-color: rgb(54, 53, 53);
-    height: 50px;
+    height: 41px;
     vertical-align: middle;
 }
 
@@ -52,7 +52,7 @@ h1{
 }
 
 #centre{
-    font-size: 27px;
+    font-size: 23px;
     flex: 1;
 
     align-items: center;
@@ -78,3 +78,22 @@ hr{
 img{
     vertical-align:text-top;
 }
+
+.teams{
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.homeTeam{
+    flex: 1;
+    padding-left: 15px;
+}
+.awayTeam{
+    flex: 1;
+    padding-right: 15px;
+}
+.timeOrScore{
+    flex: 1;
+}
+
