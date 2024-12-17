@@ -1,6 +1,6 @@
-function teamMatches(element){
-    var elementID={
-        id:element.toString()
+function teamMatches(teamid, name){
+    var teamID={
+        id:teamid.toString()
     }
 
     // removes all children of centre div
@@ -14,28 +14,28 @@ function teamMatches(element){
         headers:{
             'Content-type':'application/json'
         },
-        body:JSON.stringify(elementID)
+        body:JSON.stringify(teamID)
     })
     .then(response => response.json())
-    .then(data => data.forEach(match => {
+    .then(data => {
+        var teamHeading = document.createElement('h2');
+        teamHeading.textContent = "Scheduled games for " + name;
+        document.getElementById('centre').appendChild(teamHeading);
+
+        (data.matches).forEach(match => {
         dateConverter(match,'centre')
-    }))
-   
+    })})
+   // catch errors too
 }
 
 function dateConverter(match, divId){
-    // var fixtureTime = new Date(match.utcDate)
-
-    // const options = { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric'}
-    // var fixtureDateFormatted = fixtureTime.toLocaleDateString('en-GB', options)
-    // var fixtureTimeHours = fixtureTime.getHours().toString().padStart(2,'0')
-    // var fixtureTimeMinutes = fixtureTime.getMinutes().toString().padStart(2,'0')
-
     var fixtureDate = formatDate(match.utcDate)
     var fixtureTime = formatTime(match.utcDate)
     
-    var homeTeamText = document.createTextNode(" " + match.homeTeam.name.replace(" FC",""))
-    var awayTeamText = document.createTextNode(" " + match.awayTeam.name.replace(" FC", "")) 
+    var homeTeamText = document.createTextNode(" " + match.homeTeam.shortName)
+    var awayTeamText = document.createTextNode(match.awayTeam.shortName + " ") 
+    
+    
     
     var dateParagraph = document.createElement('p')
     var fixture = document.createElement('p')
@@ -58,13 +58,13 @@ function dateConverter(match, divId){
     homeTeamCrestIMG.src = match.homeTeam.crest
     homeTeamCrestIMG.style.width = '25pt'
     homeTeamCrestIMG.style.height = '25pt'
-    // alt text?
+    homeTeamCrestIMG.alt = "crest"
 
     var awayTeamCrestIMG = document.createElement('img')
     awayTeamCrestIMG.src = match.awayTeam.crest
     awayTeamCrestIMG.style.width = '25pt'
     awayTeamCrestIMG.style.height = '25pt'
-    // alt text?
+    awayTeamCrestIMG.alt = "crest"
 
     dateParagraph.appendChild(fixtureDateText)
     fixture.appendChild(dateParagraph)
@@ -74,8 +74,8 @@ function dateConverter(match, divId){
 
     divTime.appendChild(fixtureTimeText)
 
-    divAwayTeam.appendChild(awayTeamCrestIMG)
     divAwayTeam.appendChild(awayTeamText)
+    divAwayTeam.appendChild(awayTeamCrestIMG)
 
     divTeams.appendChild(divHomeTeam)
     divTeams.appendChild(divTime)

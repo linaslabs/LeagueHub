@@ -9,7 +9,7 @@
 </head>
 <body>
     <script src="index.js"></script>
-    <h1>LeagueHub</h1>
+    <h1 id = title>LeagueHub</h1>
     <div id = container>
         <div id = left>
             <table id = "standings" border = "1" align="center">
@@ -25,14 +25,14 @@
                     <th class = "points">Pts</th>
                 </tr>
                 
-                <% standings.forEach(standing =>{ %>
+                <% standings.standings[0].table.forEach(standing =>{ %>
                     <tr class = "rows">
-                        <th class = "team" onclick="teamMatches('<%=standing.team.id%>')"> <%= standing.position %> <img src = "<%=standing.team.crest%>" height="25pt" width="25pt"> <%= standing.team.name.replace(" FC","") %></th>
+                        <th class = "team" onclick="teamMatches('<%=standing.team.id%>','<%=standing.team.shortName%>')"> <%= standing.position %> <img src = "<%=standing.team.crest%>" height="25pt" width="25pt"> <%= standing.team.name.replace(" FC","") %></th>
                         <th width = 35> <%= standing.playedGames %></th>
                         <th width = 35> <%= standing.won %></th>
                         <th width = 35> <%= standing.draw %></th>
                         <th width = 35> <%= standing.lost %></th>
-                        <th width = 35> <%= standing.goalsFor %></th>
+                        <th width = 35> <%= standing.goalsFor %></th>   
                         <th width = 35> <%= standing.goalsAgainst %></th>
                         <th width = 35> <%= standing.goalDifference %></th>
                         <th width = 35 class = "points"> <%= standing.points %></th>
@@ -46,30 +46,45 @@
         </div>
 
         <div id = right>
+                <h2>Gameweek <%=standings.season.currentMatchday%></h2>
+                <% let currentMatchDate = null; %>
                 <% (gameWeek.matches).forEach(match => { %>
                     <p>
-                        <script>document.write(formatDate(`<%=match.utcDate%>`))</script> <br>
+                        <% if(match.utcDate.slice(0,10) != currentMatchDate){ %>
+                                <hr>
+                                <script>document.write(formatDate(`<%=match.utcDate%>`))</script>
+                                <% currentMatchDate = match.utcDate.slice(0,10) %>
+                                <br>
+                                <p></p>
+                        <% } %>
+                        
                         <div class = teams>
                             <div class = homeTeam>
-                                <img src = "<%=match.homeTeam.crest%>" height="25pt" width="25pt"> <%=match.homeTeam.name.replace(" FC", "")%>
+                                <img src = "<%=match.homeTeam.crest%>" height="25pt" width="25pt" alt = crest> <%=match.homeTeam.name.replace(" FC", "")%>
                                 <!--alt?-->
                             </div>
                             
                             <div class = timeOrScore>
-                                <script>if(`<%=match.status%>` != "FINISHED"){
-                                    document.write(formatTime(`<%=match.utcDate%>`))
-                                }else{
-                                    document.write(`<%=match.score.fullTime.home%>`+ " - " + `<%=match.score.fullTime.away%>`)
-                                }
+                                <script>
+                                    if(`<%=match.status%>` == "IN_PLAY"){
+                                        document.write("LIVE")
+                                    }
+                                    else if(`<%=match.status%>` == "PAUSED"){
+                                        document.write("HALF-TIME")
+                                    }
+                                    else if(`<%=match.status%>` != "FINISHED"){
+                                        document.write(formatTime(`<%=match.utcDate%>`))
+                                    }else{
+                                        document.write(`<%=match.score.fullTime.home%>`+ " - " + `<%=match.score.fullTime.away%>`)
+                                    }
                                 </script>
                             </div>
                             
                             <div class = awayTeam>
-                                <%=match.awayTeam.name.replace(" FC", "")%> <img src = "<%=match.awayTeam.crest%>" height="25pt" width="25pt">  <br>
+                                <%=match.awayTeam.name.replace(" FC", "")%> <img src = "<%=match.awayTeam.crest%>" height="25pt" width="25pt" alt = crest>  <br>
                             </div>
                         </div>
 
-                        <hr>                     
                     </p>
                 <% }) %>
         </div>

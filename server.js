@@ -41,8 +41,8 @@ app.get('/', async (req,res) =>{
     const gameWeekMatchesData = await gameWeekMatches.json()
     
     var variables = {
-        standings: standingData["standings"][0]["table"],
-        gameWeek : gameWeekMatchesData
+        standings: standingData,
+        gameWeek : gameWeekMatchesData,
     }
     res.render('index', variables)
 })
@@ -56,7 +56,7 @@ app.post('/teamMatches', async (req,res) =>{
         }
     })
     const data = await response.json()
-    res.send(data.matches)
+    res.send(data)
 })
 
 // making css and js files public so we can use them with index.ejs
