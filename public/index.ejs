@@ -9,7 +9,15 @@
 </head>
 <body>
     <script src="index.js"></script>
-    <h1 id = title>LeagueHub</h1>
+    <div id = banner>
+        <h1 id = title>LeagueHub</h1>
+        <p id = info>
+            <a href="https://www.football-data.org/" target = "_blank">api</a> &nbsp;
+            <a href="https://github.com/DisconnectedCable" target = "_blank">github</a> &nbsp;
+            <a href="https://www.premierleague.com/" target = "_blank">PL</a>
+        </p>
+    </div>
+
     <div id = container>
         <div id = left>
             <table id = "standings" border = "1" align="center">
@@ -28,20 +36,21 @@
                 <% standings.standings[0].table.forEach(standing =>{ %>
                     <tr class = "rows">
                         <th class = "team" onclick="teamMatches('<%=standing.team.id%>','<%=standing.team.shortName%>')"> <%= standing.position %> <img src = "<%=standing.team.crest%>" height="25pt" width="25pt"> <%= standing.team.name.replace(" FC","") %></th>
-                        <th width = 35> <%= standing.playedGames %></th>
-                        <th width = 35> <%= standing.won %></th>
-                        <th width = 35> <%= standing.draw %></th>
-                        <th width = 35> <%= standing.lost %></th>
-                        <th width = 35> <%= standing.goalsFor %></th>   
-                        <th width = 35> <%= standing.goalsAgainst %></th>
-                        <th width = 35> <%= standing.goalDifference %></th>
-                        <th width = 35 class = "points"> <%= standing.points %></th>
+                        <th width = 40> <%= standing.playedGames %></th>
+                        <th width = 40> <%= standing.won %></th>
+                        <th width = 40> <%= standing.draw %></th>
+                        <th width = 40> <%= standing.lost %></th>
+                        <th width = 40> <%= standing.goalsFor %></th>   
+                        <th width = 40> <%= standing.goalsAgainst %></th>
+                        <th width = 40> <%= standing.goalDifference %></th>
+                        <th width = 40 class = "points"> <%= standing.points %></th>
                     </tr>
                 <% }) %>
             </table>
         </div>
 
         <div id = centre>
+            <br>
             Click a team in the table to see their upcoming matches!
         </div>
 
