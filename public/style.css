@@ -4,15 +4,18 @@ body{
     margin:0px;
     padding:0px;
     box-sizing: border-box;
+
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
     background-color: white;
     font-family: "montserrat";
 }
 
 #banner{
-    height: 100px;
-    margin-bottom: 1px;
     display: flex;
     justify-content: space-between;
+    height: 95px;
     padding-top: 3px;
     padding-left: 10px;
     background-color: rgb(54, 53, 53);
@@ -45,6 +48,7 @@ a{
 }
 
 #standings{
+    height: calc(100vh - 100px);
     transform-origin: top;
     font-size: 17px;
     border-color: white;
@@ -77,14 +81,15 @@ a{
 
 #left{
     flex: 1;
-    height: 100vh;
+    height: calc(100vh - 100px);
 }
 
 #centre{
     font-size:16px;
     flex: 1;
 
-    height: 100vh;
+    font-weight: bolder;
+    height: calc(100vh - 100px);
     margin-right: 1px;
     background-color: rgb(54, 53, 53);
     color: white;
@@ -92,8 +97,43 @@ a{
     text-align: center;
     overflow: scroll;
 }
+
 #centre::-webkit-scrollbar{
     display: none;
+}
+
+.loader{
+    padding-top: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.loader--hidden{
+    opacity: 0;
+    visibility: hidden;
+    display: none;
+}
+
+.loader::after{
+    content: "";
+    width: 30px;
+    height: 30px;
+    border: 10px solid transparent;
+    border-top-color: white;
+    border-radius: 50%;
+    animation: loading 0.5s ease infinite
+}
+
+.loader::before{
+    content: "Loading  ";
+    white-space: pre;
+}
+
+@keyframes loading {
+    to{
+        transform: rotate(1turn);
+    }
 }
 
 #right{
@@ -103,11 +143,12 @@ a{
     font-size: 16px;
     flex: 1;
 
-    height: 100vh;
+    height: calc(100vh - 100px);
     align-items: center;
     text-align: center;
     overflow: scroll;
 }
+
 #right::-webkit-scrollbar{
     display: none;
 }

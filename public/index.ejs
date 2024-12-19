@@ -35,7 +35,7 @@
                 
                 <% standings.standings[0].table.forEach(standing =>{ %>
                     <tr class = "rows">
-                        <th class = "team" onclick="teamMatches('<%=standing.team.id%>','<%=standing.team.shortName%>')"> <%= standing.position %> <img src = "<%=standing.team.crest%>" height="25pt" width="25pt"> <%= standing.team.name.replace(" FC","") %></th>
+                        <th class = "team" onclick="teamMatches('<%=standing.team.id%>','<%=standing.team.shortName%>')"> <%= standing.position %> <img src = "<%=standing.team.crest%>" height="25pt" width="25pt"  alt = crest> <%= standing.team.name.replace(" FC","") %></th>
                         <th width = 40> <%= standing.playedGames %></th>
                         <th width = 40> <%= standing.won %></th>
                         <th width = 40> <%= standing.draw %></th>
@@ -48,10 +48,15 @@
                 <% }) %>
             </table>
         </div>
-
+        
+        
+        
         <div id = centre>
-            <br>
-            Click a team in the table to see their upcoming matches!
+
+            <p class = prompt> Click on a team in the table to see their upcoming matches!</p>
+            
+            <div class = 'loader loader--hidden'></div>
+
         </div>
 
         <div id = right>
@@ -70,7 +75,6 @@
                         <div class = teams>
                             <div class = homeTeam>
                                 <img src = "<%=match.homeTeam.crest%>" height="25pt" width="25pt" alt = crest> <%=match.homeTeam.name.replace(" FC", "")%>
-                                <!--alt?-->
                             </div>
                             
                             <div class = timeOrScore>

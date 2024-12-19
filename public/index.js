@@ -3,12 +3,14 @@ function teamMatches(teamid, name){
         id:teamid.toString()
     }
 
-    // removes all children of centre div
-    var centreElement = document.getElementById('centre')
-    while(centreElement.firstChild){
-        centreElement.removeChild(centreElement.firstChild)
-    }
+    var loaderIcon = document.querySelector('.loader')
+    var centreElement = document.getElementById('centre');
 
+    centreElement.replaceChildren(loaderIcon) // Deletes all elements that are children of centre div and only keeps the loader
+
+    loaderIcon.className = "loader" // Sets the loader to visible
+
+    // fetching team fixtures for the rest of the season
     fetch('http://localhost:3000/teamMatches',{
         method:'POST',
         headers:{
@@ -18,42 +20,46 @@ function teamMatches(teamid, name){
     })
     .then(response => response.json())
     .then(data => {
+        loaderIcon.classList.add("loader--hidden") // Hides loader
+
         var teamHeading = document.createElement('h2');
         teamHeading.textContent = "Scheduled games for " + name;
-        document.getElementById('centre').appendChild(teamHeading);
+        centreElement.appendChild(teamHeading); // Adds a heading to show what team was selected and what their games are
 
         (data.matches).forEach(match => {
-        dateConverter(match,'centre')
+        fixtureAppender(match,'centre') // Adds each match dynamically to the page
     })})
-   // catch errors too
+    .then(error => console.log(error))
 }
 
-function dateConverter(match, divId){
+function fixtureAppender(match, divId){
+    // Formats date and time into correct format
     var fixtureDate = formatDate(match.utcDate)
     var fixtureTime = formatTime(match.utcDate)
+    // Textnodes for the date and time
+    var fixtureDateText = document.createTextNode(fixtureDate)
+    var fixtureTimeText = document.createTextNode(fixtureTime)
     
+    // Declares variables and nodes to append to final node in order to dynamically display content
     var homeTeamText = document.createTextNode(" " + match.homeTeam.shortName)
     var awayTeamText = document.createTextNode(match.awayTeam.shortName + " ") 
     
-    
-    
+    // Main elements for nodes to be appended to, these elements will be the final ones put on the page
     var dateParagraph = document.createElement('p')
     var fixture = document.createElement('p')
     var line = document.createElement('hr')
     
-    var divTeams = document.createElement('div')
+    // Creates divs to partition the elements of a fixture so flexbox can be used (so time can be centred consistently)
+    var divTeams = document.createElement('div') // Container for the elements
     var divHomeTeam = document.createElement('div')
     var divAwayTeam = document.createElement('div')
     var divTime = document.createElement('div')
-
     divTeams.className = "teams"
     divHomeTeam.className = "homeTeam"
     divAwayTeam.className = "awayTeam"
     divTime.className = "timeOrScore"
 
-    var fixtureDateText = document.createTextNode(fixtureDate)
-    var fixtureTimeText = document.createTextNode(fixtureTime)
-
+    // Creates the images of the crests of both home and away teams, sets their properties
     var homeTeamCrestIMG = document.createElement('img')
     homeTeamCrestIMG.src = match.homeTeam.crest
     homeTeamCrestIMG.style.width = '25pt'
@@ -66,6 +72,7 @@ function dateConverter(match, divId){
     awayTeamCrestIMG.style.height = '25pt'
     awayTeamCrestIMG.alt = "crest"
 
+    // Adding all the nodes in order to create the DOM
     dateParagraph.appendChild(fixtureDateText)
     fixture.appendChild(dateParagraph)
 
@@ -88,12 +95,14 @@ function dateConverter(match, divId){
 
 }
 
+// Function to format the date into shorthand easier to read
 function formatDate(date){
     var dateFormatted = new Date(date)
     const optionsDate = { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric'}  
     return dateFormatted.toLocaleDateString('en-GB', optionsDate)
 }
 
+// Function to format the time into 24hour and easier to read
 function formatTime(time){
     var timeFormatted = new Date(time)
     const optionsTime = { hour: '2-digit', minute: '2-digit'}  
