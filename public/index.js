@@ -11,7 +11,7 @@ function teamMatches(teamid, name){
     loaderIcon.className = "loader" // Sets the loader to visible
 
     // fetching team fixtures for the rest of the season
-    fetch('http://localhost:3000/teamMatches',{
+    fetch('/teamMatches',{
         method:'POST',
         headers:{
             'Content-type':'application/json'
